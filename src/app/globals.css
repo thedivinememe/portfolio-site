@@ -203,8 +203,8 @@ body::after {
   mix-blend-mode: screen;
   background: radial-gradient(
     circle at var(--sx, 50%) var(--sy, 50%),
-    color-mix(in srgb, var(--color-accent) 45%, #ffffff) 0%,
-    transparent 45%
+    color-mix(in srgb, var(--sheen, var(--color-accent)) 58%, #ffffff) 0%,
+    transparent 50%
   );
   -webkit-background-clip: text;
   background-clip: text;

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { type CSSProperties, useCallback, useEffect, useRef, useState } from "react";
 import { DenoiseGL } from "./lazy";
 import { useDeferredMount, useReducedMotion, useReveal } from "@/lib/hooks";
 import { shouldUseWebGL } from "@/lib/webgl";
@@ -18,10 +18,13 @@ export function DenoiseText({
   text,
   className = "",
   delay = 120,
+  sheenColor,
 }: {
   text: string;
   className?: string;
   delay?: number;
+  /** Overrides the hover sheen tint for the name (defaults to section accent). */
+  sheenColor?: string;
 }) {
   const reduced = useReducedMotion();
   const deferred = useDeferredMount();
@@ -82,6 +85,7 @@ export function DenoiseText({
     <div
       ref={ref}
       className="relative inline-block max-w-full align-top"
+      style={sheenColor ? ({ "--sheen": sheenColor } as CSSProperties) : undefined}
       onPointerEnter={() => setHovered(true)}
       onPointerLeave={() => setHovered(false)}
       onPointerMove={(e) => {
