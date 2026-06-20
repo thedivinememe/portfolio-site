@@ -92,6 +92,12 @@ export const CASE_STUDIES: CaseStudy[] = [
         aspect: "4 / 5",
       },
       {
+        src: "/mythreal/dragon-anatomy.webp",
+        alt: "An anatomical study of a dragon in aged-parchment ink — organs and circulatory detail drawn like a Renaissance plate.",
+        caption: "Field study — dragon anatomy",
+        aspect: "3 / 4",
+      },
+      {
         src: "/mythreal/teaminton-map.webp",
         alt: "A hand-finished parchment location map of Teaminton.",
         caption: "Location map — Teaminton",

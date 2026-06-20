@@ -16,7 +16,14 @@
       "Bash(echo \"exit=$?\")",
       "Bash(gh auth *)",
       "Bash(git branch *)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(git commit -q -m 'Build denoise-themed portfolio site' -m 'A darkroom-aesthetic portfolio where content resolves out of grain like a *)",
+      "Bash(gh repo *)",
+      "Bash(git remote *)",
+      "Bash(git push *)",
+      "Bash(git ls-remote *)",
+      "Bash(gh pr create --base baseline --head main --title 'Build denoise-themed portfolio site' --body ' *)",
+      "Bash(git commit -q -m 'Brighten Burny'\\\\''s Chamber and restore the dragon anatomy plate' -m '- Re-process Burny'\\\\''s Chamber from source with a brightness/gamma lift; the *)"
     ]
   }
 }
