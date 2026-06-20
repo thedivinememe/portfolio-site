@@ -97,7 +97,10 @@ function Scene({
     sourceDraw(ctx, w, h, dpr);
 
     const tex = new THREE.CanvasTexture(canvas);
-    tex.colorSpace = THREE.SRGBColorSpace;
+    // Pass the sRGB image bytes through untouched. Tagging as sRGB would make
+    // three decode to linear on sample, but this custom ShaderMaterial doesn't
+    // re-encode on output — the net effect crushed shadows and darkened images.
+    tex.colorSpace = THREE.LinearSRGBColorSpace;
     tex.minFilter = THREE.LinearFilter;
     tex.magFilter = THREE.LinearFilter;
 
