@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Unused MythReal source PNGs — the site uses the optimized .webp versions
+/public/mythreal/*.png
