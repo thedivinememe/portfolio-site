@@ -22,7 +22,7 @@ export function Hero() {
         <DenoiseText
           text={HERO.name}
           className="font-display text-hero font-light text-paper [overflow-wrap:anywhere] max-w-[11ch]"
-          sheenColor="#e8a24a"
+          sheenColor="#e4ad42"
         />
         <p className="mt-8 max-w-[44ch] text-lede text-paper-dim sm:mt-10">
           {HERO.positioning}
