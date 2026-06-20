@@ -84,12 +84,19 @@ export function DenoiseText({
       className="relative inline-block max-w-full align-top"
       onPointerEnter={() => setHovered(true)}
       onPointerLeave={() => setHovered(false)}
+      onPointerMove={(e) => {
+        const el = ref.current;
+        if (!el) return;
+        const r = el.getBoundingClientRect();
+        el.style.setProperty("--sx", `${((e.clientX - r.left) / r.width) * 100}%`);
+        el.style.setProperty("--sy", `${((e.clientY - r.top) / r.height) * 100}%`);
+      }}
     >
       {/* The real name paints its final, sharp state on first paint so it's a
           fast LCP (animating the LCP element's own paint pushes LCP to the last
           frame). The reveal is carried by the WebGL overlay (deferred to idle,
-          starting resolved → only re-grains on hover) and the surrounding
-          page-load orchestration. */}
+          starting resolved) and the surrounding page-load orchestration. On
+          hover a specular sheen runs across the letters (see .sheen-text). */}
       <h1
         ref={h1Ref}
         className={className}
@@ -104,7 +111,6 @@ export function DenoiseText({
             sourceDraw={drawName}
             redrawKey={redrawKey}
             revealed={revealed}
-            hovered={hovered}
             delay={delay}
             tintHex="#8a8077"
             grain={0}
@@ -112,6 +118,14 @@ export function DenoiseText({
           />
         </div>
       )}
+
+      <span
+        aria-hidden
+        className={`${className} sheen-text`}
+        style={{ opacity: hovered ? 1 : 0 }}
+      >
+        {text}
+      </span>
     </div>
   );
 }

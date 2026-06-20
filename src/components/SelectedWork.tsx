@@ -60,7 +60,7 @@ function HeroArtifact({ cs, first }: { cs: CaseStudy; first: boolean }) {
 }
 
 function CaseStudyBlock({ cs, first }: { cs: CaseStudy; first: boolean }) {
-  const accentStyle = { "--accent": cs.accent } as CSSProperties;
+  const accentStyle = { "--color-accent": cs.accent } as CSSProperties;
 
   return (
     <article style={accentStyle} data-accent={cs.accent} className="scroll-mt-24">

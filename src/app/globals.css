@@ -13,10 +13,11 @@
   --color-paper: #ece3d5; /* primary text, warm off-white      */
   --color-paper-dim: #c9c0b4; /* de-emphasized text            */
 
-  /* Per-section accent is injected at runtime via --accent (sampled
-     from each hero image, clamped S35-55% / L60-70%, luminance-
-     normalized). A neutral ash fallback keeps the static build honest. */
-  --color-accent: var(--accent, #8a8077);
+  /* Per-section accent. Each case-study article overrides --color-accent
+     inline with its sampled hue (clamped S35-55% / L60-70%); quiet sections
+     inherit this neutral ash. NB: a var(--accent, …) indirection here would
+     resolve the fallback once at :root and never pick up the override. */
+  --color-accent: #8a8077;
 
   /* -- Type families (wired from next/font variables) ---------- */
   --font-display: var(--font-fraunces), Georgia, serif;
@@ -170,6 +171,51 @@ body::after {
   border-radius: 50%;
   background: var(--color-accent);
   cursor: pointer;
+}
+
+/* ============================================================
+   HOVER SHEEN — a cursor-tracked specular highlight tinted to the
+   section accent. "A developed print catching the light." Position is
+   driven by --sx/--sy (set in JS); opacity toggles on hover.
+   ============================================================ */
+.sheen-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 450ms var(--ease-develop);
+  mix-blend-mode: screen;
+  background: radial-gradient(
+    circle at var(--sx, 50%) var(--sy, 50%),
+    color-mix(in srgb, var(--color-accent) 55%, #ffffff) 0%,
+    transparent 42%
+  );
+}
+
+/* Name variant — clipped to the glyphs so empty space doesn't glow. */
+.sheen-text {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 450ms var(--ease-develop);
+  mix-blend-mode: screen;
+  background: radial-gradient(
+    circle at var(--sx, 50%) var(--sy, 50%),
+    color-mix(in srgb, var(--color-accent) 45%, #ffffff) 0%,
+    transparent 45%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sheen-layer,
+  .sheen-text {
+    display: none;
+  }
 }
 
 /* ============================================================

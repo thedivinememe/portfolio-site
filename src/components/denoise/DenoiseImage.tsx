@@ -102,6 +102,13 @@ export function DenoiseImage({
       className="absolute inset-0"
       onPointerEnter={() => setHovered(true)}
       onPointerLeave={() => setHovered(false)}
+      onPointerMove={(e) => {
+        const el = ref.current;
+        if (!el) return;
+        const r = el.getBoundingClientRect();
+        el.style.setProperty("--sx", `${((e.clientX - r.left) / r.width) * 100}%`);
+        el.style.setProperty("--sy", `${((e.clientY - r.top) / r.height) * 100}%`);
+      }}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
@@ -130,13 +137,18 @@ export function DenoiseImage({
             sourceDraw={sourceDraw}
             redrawKey={src}
             revealed={revealed}
-            hovered={hovered}
             delay={delay}
             tintHex={accent}
             grain={0}
           />
         </div>
       )}
+
+      <span
+        aria-hidden
+        className="sheen-layer"
+        style={{ opacity: hovered ? 1 : 0 }}
+      />
     </div>
   );
 }

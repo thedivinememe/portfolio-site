@@ -19,7 +19,6 @@ export type DenoiseGLProps = {
   /** Bump to force the source texture to be repainted (size/font/content). */
   redrawKey: string | number;
   revealed: boolean;
-  hovered: boolean;
   /** Stagger, ms — delay before this surface starts developing. */
   delay?: number;
   /** Grain tint (hex). */
@@ -35,7 +34,6 @@ function Scene({
   sourceDraw,
   redrawKey,
   revealed,
-  hovered,
   delay = 0,
   tintHex,
   grain = 0.05,
@@ -117,7 +115,7 @@ function Scene({
     if (revealed && !wasRevealed.current) delayLeft.current = (delay || 0) / 1000;
     wasRevealed.current = revealed;
     invalidate();
-  }, [revealed, hovered, delay, invalidate]);
+  }, [revealed, delay, invalidate]);
 
   useFrame((state, dt) => {
     const step = Math.min(dt, 0.05);
@@ -128,7 +126,7 @@ function Scene({
         delayLeft.current -= step;
         target = 0;
       } else {
-        target = hovered ? 0.5 : 1; // hover nudges back toward grain
+        target = 1;
       }
     }
 
@@ -136,10 +134,9 @@ function Scene({
     material.uniforms.uProgress.value = progress.current;
     material.uniforms.uTime.value = state.clock.elapsedTime;
 
-    const moving =
-      Math.abs(target - progress.current) > 0.0015 || delayLeft.current > 0;
-    const grainLive = progress.current < 0.985;
-    if (moving || (hovered && grainLive)) invalidate();
+    if (Math.abs(target - progress.current) > 0.0015 || delayLeft.current > 0) {
+      invalidate();
+    }
   });
 
   return <FullscreenTri material={material} />;
