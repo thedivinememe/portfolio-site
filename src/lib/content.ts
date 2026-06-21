@@ -43,9 +43,20 @@ export type CaseStudy = {
   hero: { src?: string; alt: string; label: string; aspect: string };
   problem: string;
   role: string;
-  craft: string;
+  craft: string | string[]; // array renders as multiple paragraphs
   outcome: string;
   link?: { label: string; href: string } | null;
+  /** Inline row of external deep-links shown near the top of the study. */
+  links?: { label: string; href: string }[];
+  /** Lead video slot (looping product capture). */
+  video?: {
+    webm: string;
+    mp4: string;
+    poster: string;
+    alt: string;
+    caption: string;
+    aspect: string;
+  };
   gallery?: GalleryItem[];
 };
 
@@ -54,7 +65,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     num: "01",
     slug: "mythreal",
     title: "MythReal",
-    kicker: "art direction · creative systems · generative pipeline",
+    kicker: "art direction · creative systems · interactive product engineering",
     accent: "#d2a94f", // sampled gold
     hero: {
       src: "/mythreal/raefund-map.webp",
@@ -62,15 +73,32 @@ export const CASE_STUDIES: CaseStudy[] = [
       label: "location map — Raefund",
       aspect: "4 / 3",
     },
+    // TODO: add the auto-battler capture files — /mythreal/raw-essence-loop.webm
+    // and /mythreal/raw-essence-loop.mp4. The poster placeholder renders until then.
+    video: {
+      webm: "/mythreal/raw-essence-loop.webm",
+      mp4: "/mythreal/raw-essence-loop.mp4",
+      poster: "/mythreal/raw-essence-poster.webp",
+      alt: "The Raw Essence auto-battler in motion: a pack opening resolves into characters, then an auto-battle runs.",
+      caption: "Raw Essence — pack opening to battle",
+      aspect: "16 / 9",
+    },
+    links: [
+      { label: "mythreal.app", href: "https://mythreal.app" },
+      { label: "Open a pack", href: "https://mythreal.app/auto-battler/" },
+      { label: "Build a character", href: "https://mythreal.app/forge/" },
+    ],
     problem:
       "Most RPGs hand you a class and put you on its rails. MythReal does the opposite — a character is defined entirely by which of 20 tech trees they invest in. Removing classes removes the scaffolding that keeps a system legible, so the real work is replacing that scaffolding with cleaner math and a tighter economy. I've been designing it for about four years.",
     role:
       "Sole designer, developer, and art director. The ruleset, worldbuilding, visual identity, and digital tooling are all mine — and they have to agree with each other.",
-    craft:
+    craft: [
       "Twenty curated tech trees instead of classes, modifier-only attributes, and a fixed action-point economy — 5 AP a turn, a 2 AP bank cap, and a spike mechanic where banking AP unlocks decisive abilities. Every tuning choice traces to one unit: 1 AP ≈ a second of focused effort ≈ a d6 of effect. A two-register visual language carries the world: hand-drawn parchment for maps, diagrams, and seals; cinematic painting for scenes and characters. Maps are generated as a base, then finished by hand in Affinity. A repeatable prompt pipeline drives both the art and the tooling — including a Claude Code–built auto-battler that generates characters from the real rules and runs automated combat in a battle log.",
+      "The digital tooling is where the ruleset comes alive. The auto-battler, Raw Essence, is a seeded gacha: every run is deterministic and shareable as a copyable code, with pack-opening, a pity system, a persistent collection, and a draft-your-party-of-three loop feeding an auto-battle simulator that runs from half-speed to instant. Both it and the Build Your Legend character forge generate characters from the genuine v0.5 rules — the rules are data, with a single source of truth driving game, tooling, and balance alike.",
+    ],
     outcome:
-      "A locked v0.5 spec, iterated through public alpha across several versioned releases; a coherent identity that scales to future modules; and working tooling that runs on the genuine ruleset.",
-    link: { label: "mythreal.app", href: "https://mythreal.app" },
+      "A locked v0.5 spec, iterated through public alpha across several versioned releases; a coherent identity that scales to future modules; and live, playable tooling — a seeded auto-battler and a character forge — running on that genuine ruleset.",
+    link: null,
     gallery: [
       {
         src: "/mythreal/logo-gold.webp",
@@ -102,6 +130,12 @@ export const CASE_STUDIES: CaseStudy[] = [
         alt: "A hand-finished parchment location map of Teaminton.",
         caption: "Location map — Teaminton",
         aspect: "16 / 9",
+      },
+      {
+        src: "/mythreal/raefund-map.webp",
+        alt: "A hand-finished parchment location map of Raefund, with labelled regions and recurring glyphs.",
+        caption: "Location map — Raefund",
+        aspect: "4 / 3",
       },
     ],
   },
