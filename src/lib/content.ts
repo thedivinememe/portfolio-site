@@ -200,4 +200,5 @@ export const CONTACT = {
     label: "LinkedIn",
     href: "https://www.linkedin.com/in/brandonwelner/",
   },
+  resume: { label: "Résumé", href: "/Brandon_Welner_Resume.pdf" },
 };

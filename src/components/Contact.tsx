@@ -37,6 +37,15 @@ export function Contact() {
               </a>
             </li>
           ))}
+          <li>
+            <a
+              href={CONTACT.resume.href}
+              download
+              className="inline-block py-2 text-paper-dim underline decoration-ash-500/30 underline-offset-4 transition-colors hover:decoration-paper"
+            >
+              {CONTACT.resume.label} ↓
+            </a>
+          </li>
         </ul>
       </Container>
 
