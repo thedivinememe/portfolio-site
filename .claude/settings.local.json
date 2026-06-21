@@ -2,7 +2,28 @@
   "permissions": {
     "allow": [
       "Bash(npm --version)",
-      "Bash(npx --yes create-next-app@latest . --typescript --tailwind --app --eslint --src-dir --import-alias \"@/*\" --no-turbopack --use-npm)"
+      "Bash(npx --yes create-next-app@latest . --typescript --tailwind --app --eslint --src-dir --import-alias \"@/*\" --no-turbopack --use-npm)",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(npx --yes lighthouse@latest http://localhost:3001 --quiet --chrome-flags=\"--headless=new --no-sandbox --disable-gpu\" --only-categories=performance,accessibility,best-practices,seo --output=json --output-path=/tmp/lh.json)",
+      "Bash(node -e \"try{const r=require\\('/tmp/lh.json'\\);for\\(const k of Object.keys\\(r.categories\\)\\){console.log\\(k, Math.round\\(r.categories[k].score*100\\)\\)}}catch\\(e\\){console.log\\('no report:',e.message\\)}\")",
+      "Bash(npx --yes lighthouse@latest http://localhost:3001 --quiet --chrome-flags=\"--headless=new --no-sandbox\" --only-categories=performance,accessibility --output=json --output-path=/tmp/lh.json)",
+      "Bash(node -e \"const r=require\\('/tmp/lh.json'\\); console.log\\('CATEGORIES:'\\); for\\(const k of Object.keys\\(r.categories\\)\\){console.log\\(' ', k, Math.round\\(r.categories[k].score*100\\)\\)} const a=r.audits; const m=['first-contentful-paint','largest-contentful-paint','cumulative-layout-shift','total-blocking-time','speed-index']; console.log\\('METRICS:'\\); for\\(const x of m\\){if\\(a[x]\\)console.log\\(' ', x, a[x].displayValue\\)}\")",
+      "Bash(grep -iE \"error|500|fail|warn|unhandled|cannot\" /tmp/nextstart.log | head -30; echo \"---tail---\"; tail -20 /tmp/nextstart.log)",
+      "Bash(node -e ' *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3002)",
+      "Bash(echo \"exit=$?\")",
+      "Bash(gh auth *)",
+      "Bash(git branch *)",
+      "Bash(git add *)",
+      "Bash(git commit -q -m 'Build denoise-themed portfolio site' -m 'A darkroom-aesthetic portfolio where content resolves out of grain like a *)",
+      "Bash(gh repo *)",
+      "Bash(git remote *)",
+      "Bash(git push *)",
+      "Bash(git ls-remote *)",
+      "Bash(gh pr create --base baseline --head main --title 'Build denoise-themed portfolio site' --body ' *)",
+      "Bash(git commit -q -m 'Brighten Burny'\\\\''s Chamber and restore the dragon anatomy plate' -m '- Re-process Burny'\\\\''s Chamber from source with a brightness/gamma lift; the *)"
     ]
   }
 }
